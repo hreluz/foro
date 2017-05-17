@@ -9,13 +9,9 @@ class PostIntegrationTest extends TestCase
 
 	function test_a_slug_is_generated_and_saved_to_the_database()
     {
-		$post = factory(Post::class)->make([
+		$post = factory(Post::class)->create([
 			'title' => 'Como instalar Laravel'
 		]);
-
-		$user = $this->defaultUser();
-
-		$user->posts()->save($post);
 
 		$this->seeInDatabase('posts',[
 			'slug' => 'como-instalar-laravel'

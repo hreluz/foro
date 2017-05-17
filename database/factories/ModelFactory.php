@@ -29,6 +29,9 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
     return [
     	'title'  => $faker->title,
     	'content' => $faker->text,
-    	'pending' => $faker->boolean()
+    	'pending' => $faker->boolean(),
+        'user_id' => function(){
+            return factory(App\User::class)->create()->id;
+        }
     ];
 });

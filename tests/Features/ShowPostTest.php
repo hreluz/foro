@@ -1,5 +1,4 @@
 <?php
-use App\Post;
 
 class ShowPostTest extends FeatureTestCase
 {
@@ -10,12 +9,11 @@ class ShowPostTest extends FeatureTestCase
 			'name' => 'Hector Lavoe'
 		]);
 
-		$post = factory(Post::class)->make([
+		$post = $this->defaultPost([
 				'title' => 'Este es el titulo del post',
-				'content' => 'Este es el contenido del post'
+				'content' => 'Este es el contenido del post',
+				'user_id' => $user->id
 		]);
-
-		$user->posts()->save($post);
 
 		//When
 		$this->visit($post->url)
@@ -29,11 +27,10 @@ class ShowPostTest extends FeatureTestCase
 		// Having
 		$user = $this->defaultUser();
 
-		$post = factory(Post::class)->make([
-			'title' => 'Old Title'
+		$post =  $this->defaultPost([
+			'title' => 'Old Title',
+			'user_id' => $user->id
 		]);
-
-		$user->posts()->save($post);
 
 		$url = $post->url;
 
