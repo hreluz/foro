@@ -24,4 +24,9 @@ class PostsController extends Controller
 
 		return "Post: ".$post->title;
 	}
+
+	public function show(Post $post)
+	{
+		return view('posts.show',compact('post'));
+	}
 }
