@@ -14,9 +14,14 @@ class PostsController extends Controller
 
 	public function store(Request $request)
 	{
+		$this->validate($request,[
+			'title' => 'required',
+			'content' => 'required'
+		]);
+
 		$post = new Post($request->all());
 		auth()->user()->posts()->save($post);
 
-		return $post->title;
+		return "Post: ".$post->title;
 	}
 }
