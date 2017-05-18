@@ -36,7 +36,7 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
         return $this->defaultUser = factory(User::class)->create($attributes);
     }
 
-    public function defaultPost(array $attributes = [])
+    public function createPost(array $attributes = [])
     {
         return factory(Post::class)->create($attributes);   
     }

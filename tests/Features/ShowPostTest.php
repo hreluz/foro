@@ -9,7 +9,7 @@ class ShowPostTest extends FeatureTestCase
 			'name' => 'Hector Lavoe'
 		]);
 
-		$post = $this->defaultPost([
+		$post = $this->createPost([
 				'title' => 'Este es el titulo del post',
 				'content' => 'Este es el contenido del post',
 				'user_id' => $user->id
@@ -27,7 +27,7 @@ class ShowPostTest extends FeatureTestCase
 		// Having
 		$user = $this->defaultUser();
 
-		$post =  $this->defaultPost([
+		$post =  $this->createPost([
 			'title' => 'Old Title',
 			'user_id' => $user->id
 		]);
