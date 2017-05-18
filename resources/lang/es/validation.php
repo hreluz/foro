@@ -147,7 +147,8 @@ return [
         'subject'               => 'asunto',
         'message'               => 'mensaje',
 
-        'content'               => 'contenido'
+        'content'               => 'contenido',
+        'comment'               => 'comentario'
     ],
 
 ];
