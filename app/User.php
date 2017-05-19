@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
@@ -45,5 +46,10 @@ class User extends Authenticatable
         ]);
 
         return $this->comments()->save($comment);
+    }
+
+    public function owns(Model $model)
+    {
+        return $this->id == $model->user_id;
     }
 }
