@@ -18,7 +18,6 @@ class CreateCommentsTable extends Migration
             $table->mediumText('comment');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('post_id');
-            $table->boolean('answer')->default(false);
 
             $table->foreign('user_id')
                 ->references('id')

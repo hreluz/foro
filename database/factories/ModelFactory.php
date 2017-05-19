@@ -45,6 +45,5 @@ $factory->define(App\Comment::class, function (Faker\Generator $faker) {
         'post_id' => function(){
             return factory(App\Post::class)->create()->id;
         },
-        'answer' => false
     ];
 });
