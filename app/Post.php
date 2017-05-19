@@ -8,6 +8,9 @@ use Illuminate\Support\Str;
 class Post extends Model
 {
 	protected $fillable = ['content', 'title'];
+	protected $casts = [
+		'pending' => 'boolean'
+	];
 
 	public function user()
 	{

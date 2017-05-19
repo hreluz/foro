@@ -24,7 +24,6 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Post::class, function (Faker\Generator $faker) {
-    static $password;
 
     return [
     	'title'  => $faker->title,
@@ -33,5 +32,19 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
         'user_id' => function(){
             return factory(App\User::class)->create()->id;
         }
+    ];
+});
+
+$factory->define(App\Comment::class, function (Faker\Generator $faker) {
+    
+    return [
+        'comment'  => $faker->text,
+        'user_id' => function(){
+            return factory(App\User::class)->create()->id;
+        },
+        'post_id' => function(){
+            return factory(App\Post::class)->create()->id;
+        },
+        'answer' => false
     ];
 });
