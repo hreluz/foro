@@ -20,6 +20,8 @@ class CommentsController extends Controller
 
 	public function accept(Comment $comment)
 	{
+        $this->authorize('acceptAnswer', $comment);
+
 		$comment->markAsAnswer();
 
 		return redirect($comment->post->url);

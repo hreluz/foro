@@ -26,10 +26,11 @@
 	@foreach($post->latestComments as $comment)
 		<article class="{{ $comment->answer ? 'answer' : '' }}">
 			{{ $comment->comment }}	
-
-			{!! Form::open(['route' => ['comments.accept', $comment], 'method' => 'POST', 'role' => 'form' , 'class' => 'form-horizontal']) !!}
-	            <button type="submit">Aceptar Respuesta</button>
-			{!! Form::close() !!}
+			@if(Gate::allows('acceptAnswer', $comment) && !$comment->answer)
+				{!! Form::open(['route' => ['comments.accept', $comment], 'method' => 'POST', 'role' => 'form' , 'class' => 'form-horizontal']) !!}
+		            <button type="submit">Aceptar Respuesta</button>
+				{!! Form::close() !!}
+			@endif
 		</article>
 	@endforeach
 
