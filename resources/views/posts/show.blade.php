@@ -3,8 +3,15 @@
 
 	<h1>{{ $post->title }}</h1>
 	{!! $post->safe_html_content !!}
-
+	
 	<p> {{ $post->user->name }}</p>
+
+	@if(auth()->check() && !auth()->user()->isSubscribedTo($post))
+		{!! Form::open(['route' => ['posts.suscribe', $post], 'method' => 'POST', 'role' => 'form' , 'class' => 'form-horizontal']) !!}
+	        <button type="submit">Suscribirse al post</button>
+		{!! Form::close() !!}
+	@endif
+
 
 	<h4>Comentarios</h4>
 
