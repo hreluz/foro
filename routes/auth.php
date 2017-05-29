@@ -10,3 +10,4 @@ Route::post('comments/{comment}/accept', ['uses' => 'CommentsController@accept',
 
 //Subscribe
 Route::post('posts/{post}/suscribe', ['uses' => 'SubscriptionsController@suscribe', 'as' => 'posts.suscribe' ]);
+Route::delete('posts/{post}/unsuscribe', ['uses' => 'SubscriptionsController@unsuscribe', 'as' => 'posts.unsuscribe' ]);

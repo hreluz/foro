@@ -67,4 +67,17 @@ class User extends Authenticatable
     {
        return $this->subscriptions()->attach($post);
     }
+
+    public function unsuscribeFrom(Post $post)
+    {
+       return $this->subscriptions()->detach($post);
+    }
+
+    public function createPost(array $data)
+    {
+        $post = new Post($data);
+        $this->posts()->save($post);
+        $this->suscribeTo($post);
+        return $post;
+    }
 }
