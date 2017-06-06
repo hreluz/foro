@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\PostCommented;
 
 class User extends Authenticatable
 {
@@ -50,7 +52,15 @@ class User extends Authenticatable
             'post_id' => $post->id
         ]);
 
-        return $this->comments()->save($comment);
+        $this->comments()->save($comment);
+
+        //Notify suscribers
+        Notification::send(
+            $post->subscribers()->where('users.id','!=',$this->id)->get(), 
+            new PostCommented($this, $comment)
+        );
+
+        return $comment;
     }
 
     public function owns(Model $model)
