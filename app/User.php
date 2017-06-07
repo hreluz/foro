@@ -57,7 +57,7 @@ class User extends Authenticatable
         //Notify suscribers
         Notification::send(
             $post->subscribers()->where('users.id','!=',$this->id)->get(), 
-            new PostCommented($this, $comment)
+            new PostCommented($comment)
         );
 
         return $comment;

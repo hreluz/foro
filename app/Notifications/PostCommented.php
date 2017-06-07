@@ -6,7 +6,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use App\User;
 use App\Comment;
 
 class PostCommented extends Notification
@@ -14,16 +13,14 @@ class PostCommented extends Notification
     use Queueable;
 
     public $comment;
-    public $user;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(User $commentAuthor, Comment $comment)
+    public function __construct(Comment $comment)
     {
-        $this->user = $commentAuthor;
         $this->comment = $comment;
     }
 
@@ -46,10 +43,15 @@ class PostCommented extends Notification
      */
     public function toMail($notifiable)
     {
+        $title = $this->comment->post->title;
+        $user_name = $this->comment->user->name;
+        $url = $this->comment->post->url;
+
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', 'https://laravel.com')
-                    ->line('Thank you for using our application!');
+            ->subject('Nuevo comentario en: '.$title)
+            ->line($user_name.' escribió un comentario en: '.$title)
+            ->action('Ver Post', $url)
+            ->line('Thank you for using our application!');
     }
 
     /**
