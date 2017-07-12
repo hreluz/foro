@@ -13,8 +13,6 @@
 
 Route::get('/', ['uses' => 'PostsController@index', 'as' => 'posts.index' ]);
 
-Auth::routes();
-
 Route::get('/home', 'HomeController@index');
 
 Route::get('posts/{post}-{slug}', ['uses' => 'PostsController@show', 'as' => 'posts.show' ])
