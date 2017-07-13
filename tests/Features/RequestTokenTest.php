@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\TokenMail;
 use App\Token;
 
-class AuthenticationTest extends FeatureTestCase
+class RequestTokenTest extends FeatureTestCase
 {
 	function test_a_guest_user_can_request_a_token()
 	{
@@ -14,7 +14,7 @@ class AuthenticationTest extends FeatureTestCase
 		$user = $this->defaultUser(['email' => 'admin@lavoe.com']);
 
 		//When
-		$this->visitRoute('login')
+		$this->visitRoute('token')
 			->type('admin@lavoe.com', 'email')
 			->press('Solicitar Token');
 
@@ -39,7 +39,7 @@ class AuthenticationTest extends FeatureTestCase
 		Mail::fake();
 
 		//When
-		$this->visitRoute('login')
+		$this->visitRoute('token')
 			->press('Solicitar Token');
 
 		$this->seeErrors([
@@ -53,7 +53,7 @@ class AuthenticationTest extends FeatureTestCase
 		Mail::fake();
 
 		//When
-		$this->visitRoute('login')
+		$this->visitRoute('token')
 			->type('Lavoe','email')
 			->press('Solicitar Token');
 
@@ -70,7 +70,7 @@ class AuthenticationTest extends FeatureTestCase
 		$user = $this->defaultUser(['email' => 'admin@lavoe.com']);
 
 		//When
-		$this->visitRoute('login')
+		$this->visitRoute('token')
 			->type('hectorlavoe@gmail.com','email')
 			->press('Solicitar Token');
 
