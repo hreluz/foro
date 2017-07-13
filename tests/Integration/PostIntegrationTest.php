@@ -1,12 +1,9 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Post;
 
-class PostIntegrationTest extends TestCase
+class PostIntegrationTest extends FeatureTestCase
 {
-	use DatabaseTransactions;
-
 	function test_a_slug_is_generated_and_saved_to_the_database()
     {
 		$post = factory(Post::class)->create([
