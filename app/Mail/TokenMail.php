@@ -31,6 +31,6 @@ class TokenMail extends Mailable
      */
     public function build()
     {
-        return "hola";
+        return $this->view('emails.token');
     }
 }

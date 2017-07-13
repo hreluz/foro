@@ -32,6 +32,12 @@ class Token extends Model
         $this->delete();
     }
 
+    public function getUrlAttribute()
+    {
+        return route('login', ['token' => $this->token ]);
+    }
+
+
     //Static Methods
 
     public static function generateFor(User $user)
