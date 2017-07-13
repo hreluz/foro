@@ -10,11 +10,10 @@ class PostCommentedTest extends TestCase
 {
 	function test_it_builds_a_mail_message()
 	{
-		$user_name = 'Hector Lavoe';
 		$post_title = 'Titulo del post';
 
 		$post = new Post(['title' => $post_title ]);
-		$author = new User(['name' => $user_name ]);
+		$author = new User(['first_name' => 'Hector', 'last_name' => 'Lavoe' ]);
 
 		$comment = new Comment;
 		$comment->post = $post;

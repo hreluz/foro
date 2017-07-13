@@ -2,7 +2,7 @@
 
 use App\Post;
 
-class PostModelTest extends TestCase
+class PostModelTest extends FeatureTestCase
 {
 	function test_adding_a_title_generates_a_slug()
 	{

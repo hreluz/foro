@@ -17,7 +17,7 @@ class RegisterController extends Controller
 	{
 		$this->validate($request,[
 			'username' => 'required',
-			'email' => 'required',
+			'email' => 'required|email',
 			'first_name' => 'required',
 			'last_name' => 'required',
 		]);
@@ -28,8 +28,8 @@ class RegisterController extends Controller
 		return redirect()->route('register_confirmation');
 	}
 
-	public function register_confirmation()
+	public function confirm()
 	{
-		return view('register.register_confirmation');
+		return view('register.confirm');
 	}
 }

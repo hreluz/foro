@@ -4,9 +4,13 @@ class ShowPostTest extends FeatureTestCase
 {
 	function test_a_user_can_see_the_post_details()
 	{
+		$first_name = 'Hector';
+		$last_name = 'Lavoe';
+
 		//Having
 		$user = $this->defaultUser([
-			'name' => 'Hector Lavoe'
+			'first_name' => $first_name,
+			'last_name' => $last_name
 		]);
 
 		$post = $this->createPost([
@@ -19,7 +23,7 @@ class ShowPostTest extends FeatureTestCase
 		$this->visit($post->url)
 			->seeInElement('h1', $post->title)
 			->see($post->content)
-			->see($post->user->name);
+			->see($first_name.' '.$last_name);
 	}
 
 	function test_old_urls_are_redirected()
