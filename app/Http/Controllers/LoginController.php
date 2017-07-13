@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Token;
-use Auth;
 
 class LoginController extends Controller
 {
-	public function login(Token $token)
+	public function login($token)
 	{
-		Auth::login($token->user);
+		$token = Token::findActive($token);
 
-		$token->delete();
+		if(!$token):
+			alert('Este enlace ya expiró por favor solicita otro','danger');
+			return redirect()->route('token');
+		endif;
+
+		$token->login();
 		
 		return redirect('/');
 	}
