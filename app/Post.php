@@ -8,6 +8,9 @@ use GrahamCampbell\Markdown\Facades\Markdown;
 
 class Post extends Model
 {
+
+	use CanBeVoted;
+
 	protected $fillable = ['content', 'title','category_id'];
 	protected $casts = [
 		'pending' => 'boolean',
@@ -82,4 +85,5 @@ class Post extends Model
 	{
 		return Markdown::convertToHtml( e($this->content));
 	}
+
 }

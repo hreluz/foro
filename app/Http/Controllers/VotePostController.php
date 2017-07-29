@@ -8,14 +8,10 @@ use App\VoteRepository;
 
 class VotePostController extends Controller
 {
-	public function __construct(VoteRepository $voteRepository)
-	{
-		$this->voteRepository = $voteRepository;
-	}
 
 	public function upvote(Post $post)
 	{
-		$this->voteRepository->upvote($post);
+		$post->upvote($post);
 
 		return [
 			'new_score' => $post->score
@@ -24,7 +20,7 @@ class VotePostController extends Controller
 
 	public function downvote(Post $post)
 	{
-		$this->voteRepository->downvote($post);
+		$post->downvote($post);
 
 		return [
 			'new_score' => $post->score
@@ -33,7 +29,7 @@ class VotePostController extends Controller
 
 	public function undoVote(Post $post)
 	{
-		$this->voteRepository->undoVote($post);
+		$post->undoVote($post);
 
 		return [
 			'new_score' => $post->score

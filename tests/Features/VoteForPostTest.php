@@ -2,7 +2,6 @@
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Vote;
-use App\VoteRepository;
 
 class VoteForPostTest extends TestCase
 {
@@ -56,7 +55,7 @@ class VoteForPostTest extends TestCase
 
 		$post = $this->createPost();
 
-		app(VoteRepository::class)->upvote($post);
+		$post->upvote();
 
 		$this->deleteJson($post->url.'/vote')
 			->assertSuccessful()
