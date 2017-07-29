@@ -21,6 +21,8 @@ class CreatePostsTable extends Migration
             $table->string('slug');
             $table->boolean('pending')->default(true);
             $table->integer('user_id')->unsigned();
+            $table->integer('score')->default(0);
+
             $table->unsignedInteger('answer_id')->nullable();
 
             $table->foreign('user_id')
