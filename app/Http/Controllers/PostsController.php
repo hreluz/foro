@@ -11,10 +11,14 @@ class PostsController extends Controller
 	public function index(Category $category = null , Request $request)
 	{		
         $routeName = $request->route()->getName();
-		$posts = Post::orderBy('created_at','DESC')
-			->scopes($this->getListScopes($category, $routeName))
-			->latest()
+
+        list($orderColumn, $orderDirection) = $this->getListOrder($request->get('orden'));
+        
+		$posts = Post::scopes($this->getListScopes($category, $routeName))
+			->orderBy($orderColumn, $orderDirection)
 			->paginate();
+
+		$posts->appends(request()->intersect(['orden']));
 
 		$categoryItems = $this->getCategoryItems($routeName);
 		return view('posts.index', compact('posts','categoryItems','category'));
@@ -71,5 +75,16 @@ class PostsController extends Controller
 			$scopes[] = 'completed';
 
 		return $scopes;
+	}
+
+	protected function getListOrder($order)
+	{
+		if($order  == 'recientes')
+			return ['created_at', 'DESC'];
+
+		if($order == 'antiguos')
+			return ['created_at', 'ASC'];
+
+		return ['created_at', 'DESC'];
 	}
 }
