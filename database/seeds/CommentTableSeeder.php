@@ -20,10 +20,13 @@ class CommentTableSeeder extends Seeder
 
 
     	for ($i=0; $i < 250; $i++):
-    		factory(Comment::class)->create([
+    		$comment = factory(Comment::class)->create([
     			'user_id' => $users->random()->id,
     			'post_id' => $posts->random()->id,
     		]);
+
+            if(rand(0,1))
+                $comment->markAsAnswer();
 
     	endfor;
     }

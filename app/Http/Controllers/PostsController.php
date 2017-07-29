@@ -9,12 +9,14 @@ use App\Category;
 class PostsController extends Controller
 {
 	public function index(Category $category = null , Request $request)
-	{
+	{		
+        $routeName = $request->route()->getName();
 		$posts = Post::orderBy('created_at','DESC')
-			->scopes($this->getListScopes($category, $request))
+			->scopes($this->getListScopes($category, $routeName))
+			->latest()
 			->paginate();
 
-		$categoryItems = $this->getCategoryItems();
+		$categoryItems = $this->getCategoryItems($routeName);
 		return view('posts.index', compact('posts','categoryItems','category'));
 	}
 
@@ -45,21 +47,19 @@ class PostsController extends Controller
 		return view('posts.show',compact('post'));
 	}
 
-	protected function getCategoryItems()
+	protected function getCategoryItems(string $routeName)
 	{
-		return Category::orderBy('name')->get()->map(function($category){
+		return Category::orderBy('name')->get()->map(function($category) use ($routeName){
 			return [
 				'title' => $category->name,
-				'full_url' => route('posts.index', $category)
+				'full_url' => route($routeName, $category)
 			];
 		})->toArray();
 	}
 
-	protected function getListScopes(Category $category, Request $request)
+	protected function getListScopes(Category $category, string $routeName)
 	{
 		$scopes  = [];
-
-		$routeName = $request->route()->getName();
 
 		if($category->exists)
 			$scopes['category'] = [$category];
