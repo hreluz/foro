@@ -5,7 +5,13 @@ Route::get('posts/create', ['uses' => 'CreatePostController@create', 'as' => 'po
 Route::post('posts', ['uses' => 'CreatePostController@store', 'as' => 'posts.store' ]);
 
 //Votes
-Route::post('posts/{post}-{slug}/vote', ['uses' => 'VotePostController@upvote', 'as' => 'posts.vote' ])
+Route::post('posts/{post}-{slug}/upvote', ['uses' => 'VotePostController@upvote', 'as' => 'posts.upvote' ])
+			->where('post', '\d+');
+
+Route::post('posts/{post}-{slug}/downvote', ['uses' => 'VotePostController@downvote', 'as' => 'posts.downvote' ])
+			->where('post', '\d+');
+
+Route::delete('posts/{post}-{slug}/vote', ['uses' => 'VotePostController@undoVote', 'as' => 'posts.undoVote' ])
 			->where('post', '\d+');
 
 //Comments
