@@ -4,6 +4,10 @@
 Route::get('posts/create', ['uses' => 'CreatePostController@create', 'as' => 'posts.create' ]);
 Route::post('posts', ['uses' => 'CreatePostController@store', 'as' => 'posts.store' ]);
 
+//Votes
+Route::post('posts/{post}-{slug}/vote', ['uses' => 'VotePostController@upvote', 'as' => 'posts.vote' ])
+			->where('post', '\d+');
+
 //Comments
 Route::post('posts/{post}/comment', ['uses' => 'CommentsController@store', 'as' => 'comments.store' ]);
 Route::post('comments/{comment}/accept', ['uses' => 'CommentsController@accept', 'as' => 'comments.accept' ]);
