@@ -56,6 +56,10 @@ class Post extends Model
 		$query->where('pending', false);
 	}
 
+	public function scopeByUser($query, User $user)
+	{
+		$query->where('user_id', $user->id);
+	}
 
 	public function subscribers()
 	{
