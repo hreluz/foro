@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', ['uses' => 'PostsController@index', 'as' => 'posts.index' ]);
+Route::get('{category?}', ['uses' => 'PostsController@index', 'as' => 'posts.index' ]);
 
 Route::get('/home', 'HomeController@index');
 

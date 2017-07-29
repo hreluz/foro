@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Post;
+use App\Category;
 
 class PostTableSeeder extends Seeder
 {
@@ -12,6 +13,12 @@ class PostTableSeeder extends Seeder
      */
     public function run()
     {
-    	factory(Post::class,100)->create();
+    	$categories = Category::select('id')->get();
+
+    	for ($i=0; $i < 100 ; $i++):
+    		factory(Post::class)->create([
+    			'category_id' => $categories->random()->id
+    		]);
+    	endfor;
     }
 }
