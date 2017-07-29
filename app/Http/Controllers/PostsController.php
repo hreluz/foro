@@ -8,9 +8,12 @@ use App\Category;
 
 class PostsController extends Controller
 {
-	public function index(Category $category = null)
+	public function index(Category $category = null , Request $request)
 	{
-		$posts = Post::orderBy('created_at','DESC')->category($category)->paginate();
+		$posts = Post::orderBy('created_at','DESC')
+			->scopes($this->getListScopes($category, $request))
+			->paginate();
+
 		$categoryItems = $this->getCategoryItems();
 		return view('posts.index', compact('posts','categoryItems','category'));
 	}
@@ -50,5 +53,23 @@ class PostsController extends Controller
 				'full_url' => route('posts.index', $category)
 			];
 		})->toArray();
+	}
+
+	protected function getListScopes(Category $category, Request $request)
+	{
+		$scopes  = [];
+
+		$routeName = $request->route()->getName();
+
+		if($category->exists)
+			$scopes['category'] = [$category];
+
+		if($routeName == 'posts.pending')
+			$scopes[] = 'pending';
+
+		elseif($routeName == 'posts.completed')
+			$scopes[] = 'completed';
+
+		return $scopes;
 	}
 }

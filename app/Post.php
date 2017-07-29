@@ -46,6 +46,17 @@ class Post extends Model
 		return $query;
 	}
 
+	public function scopePending($query)
+	{
+		$query->where('pending', true);
+	}
+
+	public function scopeCompleted($query)
+	{
+		$query->where('pending', false);
+	}
+
+
 	public function subscribers()
 	{
 		return $this->belongsToMany(User::class, 'subscriptions');
