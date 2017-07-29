@@ -1,5 +1,6 @@
 <?php
 use App\Post;
+use App\Category;
 
 class CreatePostsTest extends FeatureTestCase
 {
@@ -11,10 +12,13 @@ class CreatePostsTest extends FeatureTestCase
 
 		$this->actingAs($user = $this->defaultUser());
 
+		$category = factory(Category::class)->create();
+
 		//When
 		$this->visit(route('posts.create'))
 			->type($title, 'title')
 			->type($content, 'content')
+			->select($category->id, 'category_id')
 			->press('Publicar');
 
 		//Then
@@ -22,7 +26,9 @@ class CreatePostsTest extends FeatureTestCase
 			'title' => $title,
 			'content' => $content,
 			'pending' => true,
-			'user_id' => $user->id
+			'user_id' => $user->id,
+			'slug' => 'esta-es-una-pregunta',
+			'category_id' => $category->id
 		]);
 
 		$post = Post::first();

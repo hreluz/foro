@@ -148,7 +148,8 @@ return [
         'message'               => 'mensaje',
 
         'content'               => 'contenido',
-        'comment'               => 'comentario'
+        'comment'               => 'comentario',
+        'category_id'           => 'categoria   '
     ],
 
 ];
