@@ -10,7 +10,8 @@ class Post extends Model
 {
 	protected $fillable = ['content', 'title','category_id'];
 	protected $casts = [
-		'pending' => 'boolean'
+		'pending' => 'boolean',
+		'score' => 'integer'
 	];
 
 	public function user()
