@@ -169,7 +169,7 @@ return [
         Styde\Html\HtmlServiceProvider::class,
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
         \Laravel\Tinker\TinkerServiceProvider::class,
-
+        Barryvdh\Debugbar\ServiceProvider::class,
         //
 
         /*
@@ -229,6 +229,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
