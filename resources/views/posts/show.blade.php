@@ -44,10 +44,13 @@
             {{-- todo: Paginate comments! --}}
 
             @foreach($post->latestComments as $comment)
-                <article class="{{ $comment->answer ? 'answer' : '' }}">
+                <article class="comment {{ $comment->answer ? 'answer' : '' }}">
                     {{-- todo: support markdown in the comments as well! --}}
 
                     {{ $comment->comment }}
+
+                    {!! $comment->vote_component !!}
+
 
                     @if(Gate::allows('acceptAnswer', $comment) && !$comment->answer)
                         {!! Form::open(['route' => ['comments.accept', $comment], 'method' => 'POST']) !!}

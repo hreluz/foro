@@ -27,6 +27,8 @@ class CreateCommentsTable extends Migration
                 ->references('id')
                 ->on('posts');
 
+            $table->integer('score')->default(0);
+
             $table->timestamps();
         });
     }

@@ -5,7 +5,7 @@
 	        	:class="currentVote == 1 ? 'btn-primary' : 'btn-default'"
 	        	:disabled="voteInProgress"
 	        	class="btn btn-default">+1</button>
-	        Puntuación actual : <strong id="current-score">{{ currentScore }}</strong>
+	        Puntuación actual : <strong class="current-score">{{ currentScore }}</strong>
 	        <button @click.prevent="downvote"
 	        	:class="currentVote == -1 ? 'btn-primary' : 'btn-default'"
 	        	:disabled="voteInProgress"	        	
@@ -16,7 +16,7 @@
 
 <script>
 	export default{
-		props:['score', 'vote', 'post_id','post_slug'],
+		props:['score', 'vote', 'id', 'module'],
 		data(){
 			return {
 				currentVote: this.vote ? parseInt(this.vote) : null,
@@ -43,7 +43,7 @@
 
 				}else{
 
-					this.processRequest('post', amount == 1 ? 'upvote' : 'downvote');
+					this.processRequest('post', 'vote/' + amount);
 
 					this.currentVote = amount;
 				}
@@ -63,7 +63,7 @@
 			},
 			buildUrl(action)
 			{
-				return '/posts/'+ this.post_id + '-' + this.post_slug + '/' + action;
+				return '/'+ this.module + '/' + this.id + '/' + action;
 			}
 		}
 	}

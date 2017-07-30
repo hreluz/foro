@@ -42023,7 +42023,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['score', 'vote', 'post_id', 'post_slug'],
+	props: ['score', 'vote', 'id', 'module'],
 	data: function data() {
 		return {
 			currentVote: this.vote ? parseInt(this.vote) : null,
@@ -42049,7 +42049,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				this.currentVote = null;
 			} else {
 
-				this.processRequest('post', amount == 1 ? 'upvote' : 'downvote');
+				this.processRequest('post', 'vote/' + amount);
 
 				this.currentVote = amount;
 			}
@@ -42068,7 +42068,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			});
 		},
 		buildUrl: function buildUrl(action) {
-			return '/posts/' + this.post_id + '-' + this.post_slug + '/' + action;
+			return '/' + this.module + '/' + this.id + '/' + action;
 		}
 	}
 });
@@ -42091,9 +42091,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_vm._v("+1")]), _vm._v("\n\t        Puntuación actual : "), _c('strong', {
-    attrs: {
-      "id": "current-score"
-    }
+    staticClass: "current-score"
   }, [_vm._v(_vm._s(_vm.currentScore))]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-default",
     class: _vm.currentVote == -1 ? 'btn-primary' : 'btn-default',

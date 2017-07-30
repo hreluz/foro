@@ -12,10 +12,7 @@
 			<span class="label label-success">Completado</span>
 		@endif
 
-        <app-vote 
-        	post_id={{ $post->id }}
-        	post_slug={{ $post->slug }}
-       	 	score="{{ $post->score }}" vote="{{ $post->current_vote }}"></app-vote>
+        {!! $post->vote_component !!}
 	</p>
 	<hr>
 </article>

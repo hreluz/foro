@@ -5,18 +5,21 @@ Route::get('posts/create', ['uses' => 'CreatePostController@create', 'as' => 'po
 Route::post('posts', ['uses' => 'CreatePostController@store', 'as' => 'posts.store' ]);
 
 //Votes
-Route::post('posts/{post}-{slug}/upvote', ['uses' => 'VotePostController@upvote', 'as' => 'posts.upvote' ])
-			->where('post', '\d+');
+Route::post('posts/{post}/vote/1', ['uses' => 'VotePostController@upvote', 'as' => 'posts.upvote' ]);
 
-Route::post('posts/{post}-{slug}/downvote', ['uses' => 'VotePostController@downvote', 'as' => 'posts.downvote' ])
-			->where('post', '\d+');
+Route::post('posts/{post}/vote/-1', ['uses' => 'VotePostController@downvote', 'as' => 'posts.downvote' ]);
 
-Route::delete('posts/{post}-{slug}/vote', ['uses' => 'VotePostController@undoVote', 'as' => 'posts.undoVote' ])
-			->where('post', '\d+');
+Route::delete('posts/{post}/vote', ['uses' => 'VotePostController@undoVote', 'as' => 'posts.undoVote' ]);
 
 //Comments
 Route::post('posts/{post}/comment', ['uses' => 'CommentsController@store', 'as' => 'comments.store' ]);
 Route::post('comments/{comment}/accept', ['uses' => 'CommentsController@accept', 'as' => 'comments.accept' ]);
+
+Route::post('comments/{comment}/vote/1', ['uses' => 'VoteCommentController@upvote', 'as' => 'comments.upvote' ]);
+
+Route::post('comments/{comment}/vote/-1', ['uses' => 'VoteCommentController@downvote', 'as' => 'comments.downvote' ]);
+
+Route::delete('comments/{comment}/vote', ['uses' => 'VoteCommentController@undoVote', 'as' => 'comments.undoVote' ]);
 
 //Subscribe
 Route::post('posts/{post}/suscribe', ['uses' => 'SubscriptionsController@suscribe', 'as' => 'posts.suscribe' ]);
