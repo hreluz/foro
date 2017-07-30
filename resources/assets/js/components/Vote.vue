@@ -16,7 +16,7 @@
 
 <script>
 	export default{
-		props:['score', 'vote'],
+		props:['score', 'vote', 'post_id','post_slug'],
 		data(){
 			return {
 				currentVote: this.vote ? parseInt(this.vote) : null,
@@ -63,7 +63,7 @@
 			},
 			buildUrl(action)
 			{
-				return window.location.href + '/' + action;
+				return '/posts/'+ this.post_id + '-' + this.post_slug + '/' + action;
 			}
 		}
 	}

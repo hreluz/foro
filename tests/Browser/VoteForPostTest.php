@@ -19,10 +19,10 @@ class VoteForPostTest extends DuskTestCase
         $this->browse(function(Browser $browser) use($user, $post){
             $browser->loginAs($user)
                     ->visit($post->url)
-                    ->pressAndWaitFor('+1')
+                    ->pressAndWaitFor('1')
                     ->assertSeeIn('#current-score', 1);
 
-            sleep(1);
+            sleep(2);
 
             $this->assertDatabaseHas('posts',[
                 'id' => $post->id,
