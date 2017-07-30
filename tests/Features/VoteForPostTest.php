@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use App\Vote;
+use App\{Post,Vote};
 
 class VoteForPostTest extends TestCase
 {
@@ -20,7 +20,8 @@ class VoteForPostTest extends TestCase
 			]);
 
 		$this->assertDatabaseHas('votes',[
-			'post_id' => $post->id,
+			'votable_id' => $post->id,
+			'votable_type' => Post::class,
 			'user_id' => $user->id,
 			'vote' => 1
 		]);
@@ -41,7 +42,8 @@ class VoteForPostTest extends TestCase
 			]);
 
 		$this->assertDatabaseHas('votes',[
-			'post_id' => $post->id,
+			'votable_id' => $post->id,
+			'votable_type' => Post::class,
 			'user_id' => $user->id,
 			'vote' => -1
 		]);
@@ -63,8 +65,9 @@ class VoteForPostTest extends TestCase
 				'new_score' => 0
 			]);
 
-		$this->assertDatabaseMissing('votes',[
-			'post_id' => $post->id,
+		$this->assertDatabaseMissing('votes',[			
+			'votable_id' => $post->id,
+			'votable_type' => Post::class,
 			'user_id' => $user->id,
 		]);
 
@@ -86,7 +89,8 @@ class VoteForPostTest extends TestCase
 			->assertJson(['error' => 'Unauthenticated.']);
 
 		$this->assertDatabaseMissing('votes',[
-			'post_id' => $post->id,
+			'votable_id' => $post->id,
+			'votable_type' => Post::class,
 			'user_id' => $user->id,
 		]);
 
