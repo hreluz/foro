@@ -26,7 +26,7 @@ trait CanBeVoted{
 
 	public function getVoteComponentAttribute()
 	{
-		if(auth()->check())
+		//if(auth()->check())
 			return Html::tag('app-vote','',[
 					'module' => $this->getTable(),
                     'id' => $this->id,
